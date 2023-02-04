@@ -1,0 +1,28 @@
+---
+version: '3.0'
+
+services:
+  aplicacao:
+    image: aoliveirasilva/flask
+    environment:
+    - DB_HOST=banco
+    - DB_USER=devops
+    - DB_PASS=4linux
+    - DB_NAME=container
+    ports:
+    - 5000:5000  #faz um forwarded de portas expondo a 5000
+  
+  banco:
+    image: mariadb
+    environment:
+    - MYSQL_ROOT_PASSWORD=Abc123_
+    - MYSQL_USER=devops
+    - MYSQL_PASSWORD=4linux
+    - MYSQL_DATABASE=container
+    volumes:
+    - data:/var/lib/mysql   #setando o diretório do container em que será feito o bind
+
+volumes:
+  data: {}  #criando volume gerenciado pelo docker
+
+...
